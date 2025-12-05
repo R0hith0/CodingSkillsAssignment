@@ -7,8 +7,6 @@
 
 char currentUser[64];
 char currentRole[64];
-
-/* ========= FUNCTION PROTOTYPES ========= */
 int loginSystem();
 void mainMenu();
 void adminMenu();
@@ -21,7 +19,6 @@ void updateStudent();
 void deleteStudent();
 
 void readLine(char *buf, int size);
-/* ======================================= */
 void readLine(char *buf, int size) {
     if (fgets(buf, size, stdin) == NULL) {
         buf[0] = '\0';
@@ -31,7 +28,6 @@ void readLine(char *buf, int size) {
     buf[ln] = '\0';
 }
 
-/*---------------Login System---------------*/
 int loginSystem() {
     char username[64], password[64];
     char fileUser[64], filePass[64], fileRole[64];
@@ -64,7 +60,6 @@ int loginSystem() {
     return logged;
 }
 
-/*---------------Main Menu---------------*/
 void mainMenu() {
     if (strcmp(currentRole, "ADMIN") == 0)
         adminMenu();
@@ -72,7 +67,6 @@ void mainMenu() {
         userMenu();
 }
 
-/*---------------Admin Menu---------------*/
 void adminMenu() {
     int choice;
     do {
@@ -101,7 +95,6 @@ void adminMenu() {
     } while (choice != 6);
 }
 
-/*---------------User Menu---------------*/
 void userMenu() {
     int choice;
     do {
@@ -124,7 +117,6 @@ void userMenu() {
     } while (choice != 3);
 }
 
-/*---------------Add Student---------------*/
 int addStudent() {
     char id[64], name[128], course[128], ageBuf[16];
     int age;
@@ -159,7 +151,6 @@ int addStudent() {
     return 1;
 }
 
-/*---------------Display Students---------------*/
 void displayStudents() {
     FILE *fp = fopen(STUDENTFILE, "r");
     if (!fp) {
@@ -171,7 +162,6 @@ void displayStudents() {
     printf("\n===== ALL STUDENT RECORDS =====\n");
 
     while (fgets(line, sizeof(line), fp)) {
-        /* remove trailing newline */
         line[strcspn(line, "\n")] = '\0';
 
         char *id = strtok(line, "|");
@@ -186,8 +176,6 @@ void displayStudents() {
 
     fclose(fp);
 }
-
-/*---------------Search Student---------------*/
 void searchStudent() {
     char searchID[64];
     printf("\nEnter Student ID to Search: ");
@@ -227,8 +215,6 @@ void searchStudent() {
 
     fclose(fp);
 }
-
-/*---------------Update Student---------------*/
 void updateStudent() {
     char searchID[64];
     printf("\nEnter Student ID to Update: ");
@@ -299,8 +285,6 @@ void updateStudent() {
     else
         printf("\nStudent Not Found!\n");
 }
-
-/*---------------Delete Student---------------*/
 void deleteStudent() {
     char searchID[64];
     printf("\nEnter Student ID to Delete: ");
@@ -344,8 +328,6 @@ void deleteStudent() {
     else
         printf("\nStudent Not Found!\n");
 }
-
-/*---------------Main---------------*/
 int main() {
     currentRole[0] = '\0';
     currentUser[0] = '\0';
@@ -357,4 +339,5 @@ int main() {
     }
     return 0;
 }
+
 
